@@ -1,0 +1,27 @@
+{
+  "name": "aegis-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scalable Event-Driven Media Processing Pipeline",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "typecheck": "npm run build --workspace=packages/shared --workspace=packages/database && tsc --noEmit -p packages/shared && tsc --noEmit -p packages/database && tsc --noEmit -p packages/ingestion && tsc --noEmit -p packages/processor && tsc --noEmit -p packages/infrastructure",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present; rimraf node_modules packages/*/node_modules packages/*/dist",
+    "format": "prettier --write \"**/*.{ts,js,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,json,md,yml,yaml}\"",
+    "cdk": "npm run cdk --workspace=packages/infrastructure",
+    "deploy": "npm run deploy --workspace=packages/infrastructure"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=22.x"
+  },
+  "author": "",
+  "license": "MIT"
+}
