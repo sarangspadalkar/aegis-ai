@@ -1,0 +1,27 @@
+// Aegis-AI database schema (PostgreSQL + pgvector)
+// Run migrations with: npm run db:migrate
+// Connection URL is provided via env DATABASE_URL at runtime.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Embedding {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  jobId       String    @map("job_id")
+  contentHash String    @map("content_hash")
+  summary     String
+  // pgvector type; use raw SQL for inserts that set embedding (see migrations)
+  embedding   Unsupported("vector(1536)")?
+  metadata    Json      @default("{}")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@index([jobId])
+  @@index([contentHash])
+  @@map("embeddings")
+}
