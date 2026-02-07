@@ -1,0 +1,23 @@
+{
+  "name": "@aegis-ai/processor",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "test": "echo \"No tests in processor\""
+  },
+  "dependencies": {
+    "@aegis-ai/database": "*",
+    "@aegis-ai/shared": "*",
+    "@aws-sdk/client-secrets-manager": "^3.450.0",
+    "@aws-sdk/client-s3": "^3.450.0",
+    "openai": "^4.24.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.125",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  }
+}
