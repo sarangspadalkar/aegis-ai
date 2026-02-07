@@ -1,0 +1,17 @@
+# Dependencies and build
+node_modules/
+dist/
+cdk.out/
+.cdk.staging/
+*.tsbuildinfo
+
+# Lock files
+package-lock.json
+npm-shrinkwrap.json
+pnpm-lock.yaml
+yarn.lock
+
+# Generated
+coverage/
+*.min.js
+*.min.css
