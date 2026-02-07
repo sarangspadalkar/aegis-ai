@@ -1,0 +1,20 @@
+{
+  "name": "@aegis-ai/ingestion",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "test": "echo \"No tests in ingestion\""
+  },
+  "dependencies": {
+    "@aegis-ai/shared": "*",
+    "@aws-sdk/client-sqs": "^3.450.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.125",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  }
+}
