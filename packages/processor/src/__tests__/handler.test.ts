@@ -21,12 +21,18 @@ const validMessage = {
   createdAt: new Date().toISOString(),
 };
 
-function makeDeps(overrides?: Partial<{
-  s3Content: string;
-  summary: string;
-  embedding: number[];
-}>) {
-  const { s3Content = 'file text', summary = 'a summary', embedding = [0.1, 0.2] } = overrides ?? {};
+function makeDeps(
+  overrides?: Partial<{
+    s3Content: string;
+    summary: string;
+    embedding: number[];
+  }>
+) {
+  const {
+    s3Content = 'file text',
+    summary = 'a summary',
+    embedding = [0.1, 0.2],
+  } = overrides ?? {};
 
   const s3 = {
     send: vi.fn().mockResolvedValue({

@@ -101,10 +101,7 @@ describe('ingestion handler', () => {
     const { handler } = await import('../index');
 
     await handler(
-      makeEvent([
-        makeRecord('test-bucket', 'a.txt'),
-        makeRecord('test-bucket', 'b.txt'),
-      ]),
+      makeEvent([makeRecord('test-bucket', 'a.txt'), makeRecord('test-bucket', 'b.txt')]),
       {} as any,
       () => {}
     );

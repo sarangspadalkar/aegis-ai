@@ -27,8 +27,6 @@ describe('getObjectContent', () => {
 
   it('throws when Body is missing', async () => {
     const s3 = makeS3(undefined);
-    await expect(getObjectContent(s3, 'bucket', 'key')).rejects.toThrow(
-      'Empty object: bucket/key'
-    );
+    await expect(getObjectContent(s3, 'bucket', 'key')).rejects.toThrow('Empty object: bucket/key');
   });
 });
