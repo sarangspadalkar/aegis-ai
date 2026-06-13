@@ -9,6 +9,7 @@
   "scripts": {
     "typecheck": "npm run build --workspace=packages/shared --workspace=packages/database && tsc --noEmit -p packages/shared && tsc --noEmit -p packages/database && tsc --noEmit -p packages/ingestion && tsc --noEmit -p packages/processor && tsc --noEmit -p packages/infrastructure",
     "build": "npm run build --workspaces --if-present",
+    "pretest": "prisma generate --schema packages/database/prisma/schema.prisma",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -19,9 +20,11 @@
     "deploy": "npm run deploy --workspace=packages/infrastructure"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "^12.0.2",
     "@vitest/coverage-v8": "^4.1.8",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
+    "testcontainers": "^12.0.2",
     "typescript": "^5.3.3",
     "vitest": "^4.1.8"
   },
