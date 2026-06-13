@@ -58,17 +58,17 @@ flowchart LR
 
 ## Tech Stack
 
-| Layer        | Technology                         |
-|-------------|-------------------------------------|
-| Language    | TypeScript / Node.js                |
-| Infrastructure | AWS CDK (IaC)                    |
-| Storage     | S3 (media), RDS PostgreSQL + pgvector |
-| Database    | Prisma ORM, pgvector                |
-| Queue       | SQS + DLQ                          |
-| Compute     | Lambda                              |
-| AI/ML       | OpenAI (summarization, embeddings) |
-| Secrets     | AWS Secrets Manager                |
-| CI/CD       | GitHub Actions                     |
+| Layer          | Technology                            |
+| -------------- | ------------------------------------- |
+| Language       | TypeScript / Node.js                  |
+| Infrastructure | AWS CDK (IaC)                         |
+| Storage        | S3 (media), RDS PostgreSQL + pgvector |
+| Database       | Prisma ORM, pgvector                  |
+| Queue          | SQS + DLQ                             |
+| Compute        | Lambda                                |
+| AI/ML          | OpenAI (summarization, embeddings)    |
+| Secrets        | AWS Secrets Manager                   |
+| CI/CD          | GitHub Actions                        |
 
 ---
 
@@ -135,15 +135,15 @@ After deploy, upload a `.txt` file to the media bucket to trigger the pipeline.
 
 ## Development
 
-| Command | Description |
-|--------|-------------|
-| `npm run build` | Build all packages |
-| `npm run typecheck` | Type-check all packages (builds shared + database first) |
-| `npm run test` | Run tests in all packages |
-| `npm run format` | Format with Prettier |
-| `npm run format:check` | Check formatting only |
-| `npm run cdk -- --help` | CDK commands (synth, diff, deploy, etc.) |
-| `npm run deploy` | Deploy CDK stack |
+| Command                 | Description                                              |
+| ----------------------- | -------------------------------------------------------- |
+| `npm run build`         | Build all packages                                       |
+| `npm run typecheck`     | Type-check all packages (builds shared + database first) |
+| `npm run test`          | Run tests in all packages                                |
+| `npm run format`        | Format with Prettier                                     |
+| `npm run format:check`  | Check formatting only                                    |
+| `npm run cdk -- --help` | CDK commands (synth, diff, deploy, etc.)                 |
+| `npm run deploy`        | Deploy CDK stack                                         |
 
 **Database (from `packages/database`):**
 

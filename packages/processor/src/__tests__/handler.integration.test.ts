@@ -116,7 +116,13 @@ describe('processor handler (integration)', () => {
 
     await expect(
       handler(
-        makeSqsEvent({ jobId: 'job-s3-fail', bucket: 'test-bucket', key: 'missing.txt', mediaType: 'text', createdAt: new Date().toISOString() }),
+        makeSqsEvent({
+          jobId: 'job-s3-fail',
+          bucket: 'test-bucket',
+          key: 'missing.txt',
+          mediaType: 'text',
+          createdAt: new Date().toISOString(),
+        }),
         {} as never,
         () => {}
       )
@@ -145,7 +151,13 @@ describe('processor handler (integration)', () => {
 
     await expect(
       handler(
-        makeSqsEvent({ jobId: 'job-openai-fail', bucket: 'test-bucket', key: 'doc.txt', mediaType: 'text', createdAt: new Date().toISOString() }),
+        makeSqsEvent({
+          jobId: 'job-openai-fail',
+          bucket: 'test-bucket',
+          key: 'doc.txt',
+          mediaType: 'text',
+          createdAt: new Date().toISOString(),
+        }),
         {} as never,
         () => {}
       )
@@ -171,12 +183,20 @@ describe('processor handler (integration)', () => {
     });
 
     await handler(
-      makeSqsEvent({ jobId, bucket: 'test-bucket', key: 'docs/fox.txt', mediaType: 'text', createdAt: new Date().toISOString() }),
+      makeSqsEvent({
+        jobId,
+        bucket: 'test-bucket',
+        key: 'docs/fox.txt',
+        mediaType: 'text',
+        createdAt: new Date().toISOString(),
+      }),
       {} as never,
       () => {}
     );
 
-    const rows = await prisma.$queryRaw<Array<{ job_id: string; summary: string; content_hash: string }>>`
+    const rows = await prisma.$queryRaw<
+      Array<{ job_id: string; summary: string; content_hash: string }>
+    >`
       SELECT job_id, summary, content_hash FROM embeddings WHERE job_id = ${jobId}
     `;
 

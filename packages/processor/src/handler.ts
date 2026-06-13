@@ -34,7 +34,12 @@ export function createHandler({ s3, openai, prisma, retryConfig }: HandlerDeps):
 
       const { jobId, bucket, key, mediaType, retryCount = 0 } = body;
 
-      logger.jobLifecycle(jobId, 'PROCESSING', 'Starting processing', { bucket, key, mediaType, retryCount });
+      logger.jobLifecycle(jobId, 'PROCESSING', 'Starting processing', {
+        bucket,
+        key,
+        mediaType,
+        retryCount,
+      });
 
       try {
         const content = await getObjectContent(s3, bucket, key);

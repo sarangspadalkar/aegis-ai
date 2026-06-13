@@ -45,7 +45,7 @@ export class DataStore extends Construct {
       allocatedStorage: 20,
       maxAllocatedStorage: 100,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
-      storageEncrypted: true
+      storageEncrypted: true,
     });
 
     this.dbSecret = dbInstance.secret!;

@@ -158,9 +158,7 @@ describe('cross-construct invariants', () => {
     );
 
     const fns = template.findResources('AWS::Lambda::Function');
-    const maxTimeout = Math.max(
-      ...Object.values(fns).map((f: any) => f.Properties?.Timeout ?? 0)
-    );
+    const maxTimeout = Math.max(...Object.values(fns).map((f: any) => f.Properties?.Timeout ?? 0));
 
     expect(maxVisibility).toBeGreaterThanOrEqual(maxTimeout);
   });
