@@ -20,10 +20,10 @@ describe('DataStore', () => {
     template.resourceCountIs('AWS::EC2::VPC', 1);
   });
 
-  it('provisions RDS PostgreSQL 15.4', () => {
+  it('provisions RDS PostgreSQL 18', () => {
     template.hasResourceProperties('AWS::RDS::DBInstance', {
       Engine: 'postgres',
-      EngineVersion: '15.4',
+      EngineVersion: '18',
     });
   });
 

@@ -6,6 +6,7 @@ import * as lambdaNode from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as s3n from 'aws-cdk-lib/aws-s3-notifications';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import { EnvKeys } from '@aegis-ai/shared';
 
 export class IngestionPipeline extends Construct {
   readonly mediaBucket: s3.Bucket;
@@ -48,8 +49,8 @@ export class IngestionPipeline extends Construct {
       timeout: cdk.Duration.seconds(30),
       memorySize: 256,
       environment: {
-        PROCESSING_QUEUE_URL: this.processingQueue.queueUrl,
-        MEDIA_BUCKET_NAME: this.mediaBucket.bucketName,
+        [EnvKeys.PROCESSING_QUEUE_URL]: this.processingQueue.queueUrl,
+        [EnvKeys.MEDIA_BUCKET_NAME]: this.mediaBucket.bucketName,
       },
       tracing: lambda.Tracing.ACTIVE,
       bundling: {

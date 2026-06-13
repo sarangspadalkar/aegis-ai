@@ -8,6 +8,7 @@ import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources';
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import { EnvKeys } from '@aegis-ai/shared';
 
 export interface ProcessorPipelineProps {
   vpc: ec2.IVpc;
@@ -34,12 +35,10 @@ export class ProcessorPipeline extends Construct {
       vpc: props.vpc,
       vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
       environment: {
-        PROCESSING_QUEUE_URL: props.processingQueue.queueUrl,
-        MEDIA_BUCKET_NAME: props.mediaBucket.bucketName,
-        OPENAI_SECRET_ARN: props.openAiSecret.secretArn,
-        DB_SECRET_ARN: props.dbSecret.secretArn,
-        DB_HOST: props.dbEndpoint,
-        DB_NAME: 'aegisai',
+        [EnvKeys.OPENAI_SECRET_ARN]: props.openAiSecret.secretArn,
+        [EnvKeys.DB_SECRET_ARN]: props.dbSecret.secretArn,
+        [EnvKeys.DB_HOST]: props.dbEndpoint,
+        [EnvKeys.DB_NAME]: 'aegisai',
       },
       tracing: lambda.Tracing.ACTIVE,
       retryAttempts: 0,
