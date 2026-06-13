@@ -4,10 +4,10 @@ on:
   push:
     branches: [main, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [main]
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
 
 jobs:
   build-and-test:
@@ -30,44 +30,45 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-// TODO: Uncomment this when we have a way to deploy the infrastructure
-  # deploy:
-  #   needs: build-and-test
-  #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     id-token: write
-  #     contents: read
-  #   steps:
-  #     - uses: actions/checkout@v4
+      - name: Test
+        run: npm test
 
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: ${{ env.NODE_VERSION }}
-  #         cache: 'npm'
-
-  #     - name: Configure AWS credentials
-  #       uses: aws-actions/configure-aws-credentials@v4
-  #       with:
-  #         role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-  #         aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
-
-  #     - name: Install dependencies
-  #       run: npm ci
-
-  #     - name: Build
-  #       run: npm run build
-
-  #     - name: CDK Synth
-  #       run: npm run cdk -- synth
-  #       working-directory: packages/infrastructure
-  #       continue-on-error: true
-
-  #     - name: CDK Deploy
-  #       run: npm run deploy
-  #       working-directory: packages/infrastructure
-  #       env:
-  #         CDK_DEFAULT_ACCOUNT: ${{ secrets.AWS_ACCOUNT_ID }}
-  #         CDK_DEFAULT_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
-  #       continue-on-error: true
+# TODO: Uncomment when ready to deploy infrastructure
+# deploy:
+#   needs: build-and-test
+#   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#   runs-on: ubuntu-latest
+#   permissions:
+#     id-token: write
+#     contents: read
+#   steps:
+#     - uses: actions/checkout@v4
+#
+#     - name: Setup Node.js
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: ${{ env.NODE_VERSION }}
+#         cache: 'npm'
+#
+#     - name: Configure AWS credentials
+#       uses: aws-actions/configure-aws-credentials@v4
+#       with:
+#         role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+#         aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
+#
+#     - name: Install dependencies
+#       run: npm ci
+#
+#     - name: Build
+#       run: npm run build
+#
+#     - name: CDK Synth
+#       run: npm run cdk -- synth
+#       working-directory: packages/infrastructure
+#
+#     - name: CDK Deploy
+#       run: npm run deploy
+#       working-directory: packages/infrastructure
+#       env:
+#         CDK_DEFAULT_ACCOUNT: ${{ secrets.AWS_ACCOUNT_ID }}
+#         CDK_DEFAULT_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
