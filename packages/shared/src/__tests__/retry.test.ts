@@ -12,7 +12,8 @@ describe('retryAsync', () => {
   });
 
   it('retries on failure and returns the first success', async () => {
-    const fn = vi.fn()
+    const fn = vi
+      .fn()
       .mockRejectedValueOnce(new Error('first fail'))
       .mockRejectedValueOnce(new Error('second fail'))
       .mockResolvedValue('ok');
@@ -26,8 +27,9 @@ describe('retryAsync', () => {
   it('throws the last error after exhausting all attempts', async () => {
     const fn = vi.fn().mockRejectedValue(new Error('always fails'));
 
-    await expect(retryAsync(fn, { maxAttempts: 3, baseDelayMs: 0 }))
-      .rejects.toThrow('always fails');
+    await expect(retryAsync(fn, { maxAttempts: 3, baseDelayMs: 0 })).rejects.toThrow(
+      'always fails'
+    );
 
     expect(fn).toHaveBeenCalledTimes(3);
   });
@@ -37,7 +39,8 @@ describe('retryAsync', () => {
     const firstErr = new Error('first');
     const secondErr = new Error('second');
 
-    const fn = vi.fn()
+    const fn = vi
+      .fn()
       .mockRejectedValueOnce(firstErr)
       .mockRejectedValueOnce(secondErr)
       .mockResolvedValue('ok');

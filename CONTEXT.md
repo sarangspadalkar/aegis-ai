@@ -12,6 +12,7 @@ The Lambda that receives S3 event notifications and enqueues a Job message onto 
 
 **Processor**
 The Lambda that dequeues Job messages, fetches the S3 object, calls OpenAI for summarisation and embedding, and persists an Embedding record. Orchestrated by `index.ts`; internal responsibilities split across:
+
 - `config` — env var validation at cold-start
 - `openai-client` — OpenAI SDK initialisation from Secrets Manager
 - `s3-fetcher` — S3 object retrieval

@@ -4,12 +4,7 @@
 
 export type MediaType = 'audio' | 'text';
 
-export type JobStatus =
-  | 'PENDING'
-  | 'QUEUED'
-  | 'PROCESSING'
-  | 'COMPLETED'
-  | 'FAILED';
+export type JobStatus = 'PENDING' | 'QUEUED' | 'PROCESSING' | 'COMPLETED' | 'FAILED';
 
 export interface ProcessingJob {
   jobId: string;

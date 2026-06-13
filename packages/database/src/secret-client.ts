@@ -31,9 +31,7 @@ export async function getPrismaFromSecret(
   const cached = cache.get(key);
   if (cached) return cached;
 
-  const res = await secretsClient.send(
-    new GetSecretValueCommand({ SecretId: secretArn })
-  );
+  const res = await secretsClient.send(new GetSecretValueCommand({ SecretId: secretArn }));
   const secret = JSON.parse(res.SecretString ?? '{}') as {
     username?: string;
     password?: string;
