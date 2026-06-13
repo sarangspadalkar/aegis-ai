@@ -12,13 +12,14 @@
     "test": "echo \"No tests in infrastructure\""
   },
   "dependencies": {
+    "@aegis-ai/shared": "*",
     "aws-cdk-lib": "^2.120.0",
     "constructs": "^10.3.0",
     "source-map-support": "^0.5.21"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
-    "esbuild": "^0.19.0",
+    "esbuild": "^0.28.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   }

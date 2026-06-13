@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "typecheck": "npm run build --workspace=packages/shared --workspace=packages/database && tsc --noEmit -p packages/shared && tsc --noEmit -p packages/database && tsc --noEmit -p packages/ingestion && tsc --noEmit -p packages/processor && tsc --noEmit -p packages/infrastructure",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=packages/shared --workspace=packages/database --workspace=packages/ingestion --workspace=packages/processor --workspace=packages/infrastructure",
     "pretest": "prisma generate --schema packages/database/prisma/schema.prisma",
     "test": "vitest run",
     "test:watch": "vitest",

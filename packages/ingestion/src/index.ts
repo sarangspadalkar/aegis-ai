@@ -3,10 +3,9 @@ import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
 import { logger } from '@aegis-ai/shared';
 import type { SQSProcessingMessage } from '@aegis-ai/shared';
 import { randomUUID } from 'crypto';
+import { config } from './config';
 
 const sqs = new SQSClient({});
-const PROCESSING_QUEUE_URL = process.env.PROCESSING_QUEUE_URL!;
-const MEDIA_BUCKET_NAME = process.env.MEDIA_BUCKET_NAME!;
 
 function inferMediaType(key: string): 'audio' | 'text' {
   const ext = key.split('.').pop()?.toLowerCase();
@@ -24,7 +23,7 @@ export const handler: S3Handler = async (event: S3Event) => {
     const bucket = record.s3.bucket.name;
     const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, ' '));
 
-    if (bucket !== MEDIA_BUCKET_NAME) {
+    if (bucket !== config.mediaBucketName) {
       logger.warn('Ignoring event from non-configured bucket', { bucket, key });
       continue;
     }
@@ -50,7 +49,7 @@ export const handler: S3Handler = async (event: S3Event) => {
     try {
       await sqs.send(
         new SendMessageCommand({
-          QueueUrl: PROCESSING_QUEUE_URL,
+          QueueUrl: config.processingQueueUrl,
           MessageBody: JSON.stringify(message),
         })
       );
